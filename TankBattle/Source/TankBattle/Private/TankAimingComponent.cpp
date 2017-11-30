@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "TankBattle.h"
+#include "TankBarrel.h"
 #include "TankAimingComponent.h"
 
 
@@ -14,7 +15,7 @@ UTankAimingComponent::UTankAimingComponent()
 	// ...
 }
 
-void UTankAimingComponent::SetBarrelReference(UStaticMeshComponent* BarrelToSet)
+void UTankAimingComponent::SetBarrelReference(UTankBarrel* BarrelToSet)
 {
 	Barrel = BarrelToSet;
 }
@@ -46,21 +47,27 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 	// Calculate the Out Launch Velocity
 	if (UGameplayStatics::SuggestProjectileVelocity
-			(
+		(
 			this,
 			OutLaunchVelocity,
 			StartLocation,
 			HitLocation,
 			LaunchSpeed,
-			false,
-			0,
-			0,
 			ESuggestProjVelocityTraceOption::DoNotTrace
-			)
 		)
+	   )
 	{
 		auto AimDirection = OutLaunchVelocity.GetSafeNormal();
-		UE_LOG(LogTemp, Warning, TEXT("Aiming at %s"), *AimDirection.ToString());
+		MoveBarrelTowards(AimDirection);
 	}
+}
+
+void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
+{
+	// Find difference between current rotation and aim dir
+	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
+	auto AimAtRotator = AimDirection.Rotation();
+	auto DeltaRotator = AimAtRotator - BarrelRotator;
+	Barrel->Elevate(5); // TODO remove magic number
 }
 
