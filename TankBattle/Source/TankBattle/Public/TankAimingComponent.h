@@ -22,7 +22,6 @@ public:
 
 	void SetBarrelReference(UTankBarrel* BarrelToSet);
 	void SetTurretReference(UTankTurret* TurretToSet);
-	void SetTrackReferences(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
 protected:
 	// Called when the game starts
@@ -38,6 +37,4 @@ public:
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
-	UTankTrack* LeftTrack = nullptr;
-	UTankTrack* RightTrack = nullptr;
 };

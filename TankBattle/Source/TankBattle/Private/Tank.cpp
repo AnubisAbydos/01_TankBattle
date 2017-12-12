@@ -4,6 +4,7 @@
 #include "TankBarrel.h"
 #include "Projectile.h"
 #include "TankAimingComponent.h"
+#include "TankMovementComponent.h"
 #include "Tank.h"
 
 // Sets default values
@@ -43,11 +44,6 @@ void ATank::SetBarrelReference(UTankBarrel * BarrelToSet)
 void ATank::SetTurretReference(UTankTurret * TurretToSet)
 {
 	TankAimingComponent->SetTurretReference(TurretToSet);
-}
-
-void ATank::SetTrackReferences(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet)
-{
-	TankAimingComponent->SetTrackReferences(LeftTrackToSet, RightTrackToSet);
 }
 
 void ATank::Fire()

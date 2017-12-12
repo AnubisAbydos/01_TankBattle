@@ -6,10 +6,6 @@
 
 void UTankTrack::SetThrottle(float Throttle)
 {
-	//auto Time = GetWorld()->GetTimeSeconds();
-	auto Name = GetName();
-	UE_LOG(LogTemp, Warning, TEXT("%s This track throttle! %f"), *Name, Throttle);
-
 	Throttle = FMath::Clamp<float>(Throttle, -1, 1);
 	auto ForceApplied = GetForwardVector() * Throttle * TrackMaxDrivingForce;
 	auto ForceLocation = GetComponentLocation();

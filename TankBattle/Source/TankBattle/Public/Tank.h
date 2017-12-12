@@ -7,8 +7,8 @@
 
 class UTankBarrel;
 class UTankTurret;
-class UTankTrack;
 class UTankAimingComponent;
+class UTankMovementComponent;
 class AProjectile;
 
 UCLASS()
@@ -26,6 +26,9 @@ protected:
 
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
+	UPROPERTY(BlueprintReadOnly)
+	UTankMovementComponent* TankMovementComponent = nullptr;
+
 public:	
 
 	// Called to bind functionality to input
@@ -38,9 +41,6 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = Setup)
 	void SetTurretReference(UTankTurret* TurretToSet);
-
-	UFUNCTION(BlueprintCallable, Category = Setup)
-	void SetTrackReferences(UTankTrack* LeftTrackToSet, UTankTrack* RightTrackToSet);
 
 	UFUNCTION(BlueprintCallable, Category = Firing)
 	void Fire();

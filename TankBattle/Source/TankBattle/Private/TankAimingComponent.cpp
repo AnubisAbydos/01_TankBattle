@@ -28,13 +28,6 @@ void UTankAimingComponent::SetTurretReference(UTankTurret* TurretToSet)
 	Turret = TurretToSet;
 }
 
-void UTankAimingComponent::SetTrackReferences(UTankTrack * LeftTrackToSet, UTankTrack * RightTrackToSet)
-{
-	if (!LeftTrackToSet || !RightTrackToSet) { return; }
-	LeftTrack = LeftTrackToSet;
-	RightTrack = RightTrackToSet;
-}
-
 // Called when the game starts
 void UTankAimingComponent::BeginPlay()
 {
