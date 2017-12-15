@@ -9,10 +9,3 @@ ATank::ATank()
  	// No Ticking
 	PrimaryActorTick.bCanEverTick = false;
 }
-
-void ATank::BeginPlay()
-{
-	Super::BeginPlay();
-}
-
-
