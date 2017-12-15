@@ -1,7 +1,7 @@
 // Copyright Silent Neon (Lex Hall)
 
 #include "TankBattle.h"
-#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "TankAIController.h"
 
 
@@ -15,19 +15,19 @@ void ATankAIController::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 	
-	auto PlayerTank = Cast<ATank>(GetWorld()->GetFirstPlayerController()->GetPawn());
-	auto ControlledTank = Cast<ATank>(GetPawn());
+	auto PlayerTank = GetWorld()->GetFirstPlayerController()->GetPawn();
+	auto ControlledTankAimComp = GetPawn()->FindComponentByClass<UTankAimingComponent>();
 
-	if (!ensure(PlayerTank)) { return; }
+	if (!ensure(PlayerTank && ControlledTankAimComp)) { return; }
 
 	// Move towards player
 	MoveToActor(PlayerTank, AcceptanceRadius); // TODO Check Radius
 
 	// Aim towards PLayer
-	ControlledTank->AimAt(PlayerTank->GetActorLocation());
+	ControlledTankAimComp->AimAt(PlayerTank->GetActorLocation());
 
 	// Fire If Ready
-	ControlledTank->Fire();
+	ControlledTankAimComp->Fire();
 
 }
 

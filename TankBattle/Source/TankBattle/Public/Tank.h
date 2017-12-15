@@ -5,9 +5,6 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
-class UTankAimingComponent;
-class AProjectile;
-
 UCLASS()
 class TANKBATTLE_API ATank : public APawn
 {
@@ -19,19 +16,4 @@ public:
 
 	virtual void BeginPlay() override;
 
-protected:
-	UPROPERTY(BlueprintReadOnly)
-	UTankAimingComponent* TankAimingComponent = nullptr;
-
-public:	
-	void AimAt(FVector HitLocation);
-
-	UFUNCTION(BlueprintCallable, Category = "Firing")
-	void Fire();
-
-	UPROPERTY(EditAnywhere, Category = "Setup")
-	TSubclassOf<AProjectile>ProjectileBlueprint;
-
-	UPROPERTY(EditAnywhere, Category = "Firing")
-	float LaunchSpeed = 8000;
 };
