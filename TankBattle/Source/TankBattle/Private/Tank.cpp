@@ -1,5 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
-
+// Copyright Silent Neon (Lex Hall)
 #include "TankBattle.h"
 #include "TankBarrel.h"
 #include "Projectile.h"

@@ -1,4 +1,4 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Silent Neon (Lex Hall)
 
 #pragma once
 
@@ -17,11 +17,14 @@ class TANKBATTLE_API ATankPlayerController : public APlayerController
 
 public:
 	virtual void BeginPlay() override;
-	virtual void Tick(float DeltaTime) override;
-	
-private:
-	ATank* GetControlledTank() const;
 
+	virtual void Tick(float DeltaTime) override;
+
+protected:
+	UFUNCTION(BlueprintCallable, Category = "Setup")
+	ATank* GetControlledTank() const;	
+
+private:
 	// Moves Barrel
 	void AimTowardsCrosshair();
 

@@ -1,9 +1,20 @@
-// Fill out your copyright notice in the Description page of Project Settings.
+// Copyright Silent Neon (Lex Hall)
 
 #pragma once
 
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
+
+
+// Enum for Aiming State
+UENUM()
+enum class EFiringStatus : uint8
+{
+	Reloading,
+	Aiming,
+	Locked
+};
+
 
 // Forward Declaration
 class UTankBarrel;
@@ -27,6 +38,9 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
+	UPROPERTY(BlueprintReadOnly, Category = "State")
+	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+
 public:	
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 
@@ -37,4 +51,5 @@ public:
 private:
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
+
 };
