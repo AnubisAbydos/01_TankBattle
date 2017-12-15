@@ -56,4 +56,7 @@ private:
 
 	double LastFireTime = 0;
 
+	UPROPERTY(EditAnywhere, Category = "Firing")
+	float LaunchSpeed = 8000;
+
 };
