@@ -37,7 +37,7 @@ public:
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringStatus FiringStatus = EFiringStatus::Reloading;
+	EFiringStatus FiringStatus = EFiringStatus::Aiming;
 
 public:	
 	void AimAt(FVector HitLocation, float LaunchSpeed);

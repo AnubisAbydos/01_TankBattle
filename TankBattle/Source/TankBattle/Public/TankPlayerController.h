@@ -9,6 +9,7 @@
  * 
  */
 class ATank;
+class UTankAimingComponent;
 
 UCLASS()
 class TANKBATTLE_API ATankPlayerController : public APlayerController
@@ -24,6 +25,8 @@ protected:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	ATank* GetControlledTank() const;	
 
+	UFUNCTION(BlueprintImplementableEvent, Category = "Setup")
+	void FoundAimingComponent(UTankAimingComponent* AimCompRef);
 private:
 	// Moves Barrel
 	void AimTowardsCrosshair();

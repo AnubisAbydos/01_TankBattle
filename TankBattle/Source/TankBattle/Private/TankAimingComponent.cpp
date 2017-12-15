@@ -22,7 +22,7 @@ void UTankAimingComponent::Initialize(UTankBarrel * BarrelToSet, UTankTurret * T
 
 void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 {
-	if (!Barrel || !Turret) { return; }
+	if (!ensure(Barrel && Turret)) { return; }
 
 	FVector OutLaunchVelocity;
 	FVector StartLocation = Barrel->GetSocketLocation(FName("Projectile"));
@@ -51,7 +51,7 @@ void UTankAimingComponent::AimAt(FVector HitLocation, float LaunchSpeed)
 
 void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 {
-	if (!Barrel) { return; }
+	if (!ensure(Barrel)) { return; }
 	// Find difference between current rotation and aim dir
 	auto BarrelRotator = Barrel->GetForwardVector().Rotation();
 	auto AimAtRotator = AimDirection.Rotation();
@@ -61,7 +61,7 @@ void UTankAimingComponent::MoveBarrelTowards(FVector AimDirection)
 
 void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
 {
-	if (!Turret) { return; }
+	if (!ensure(Turret)) { return; }
 	auto TurretRotator = Turret->GetForwardVector().Rotation();
 	auto AimAtRotator = AimDirection.Rotation();
 	auto DeltaRotator = AimAtRotator - TurretRotator;
@@ -70,9 +70,10 @@ void UTankAimingComponent::MoveTurretTowards(FVector AimDirection)
 
 void UTankAimingComponent::Fire(TSubclassOf<AProjectile>ProjectileBlueprint, float LaunchSpeed)
 {
+	if (!ensure(Barrel)) { return; }
 	bool isReloaded = (FPlatformTime::Seconds() - LastFireTime) > ReloadTimeSecs;
 
-	if (Barrel && isReloaded)
+	if (isReloaded)
 	{
 		auto Projectile = GetWorld()->SpawnActor<AProjectile>(ProjectileBlueprint, Barrel->GetSocketLocation(FName("Projectile")), Barrel->GetSocketRotation(FName("Projectile")));
 		Projectile->LaunchProjectile(LaunchSpeed);
