@@ -5,8 +5,6 @@
 #include "GameFramework/Pawn.h"
 #include "Tank.generated.h"
 
-class UTankBarrel;
-class UTankTurret;
 class UTankAimingComponent;
 class UTankMovementComponent;
 class AProjectile;
@@ -21,9 +19,6 @@ public:
 	ATank();
 
 protected:
-	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
-
 	UPROPERTY(BlueprintReadOnly)
 	UTankAimingComponent* TankAimingComponent = nullptr;
 
@@ -31,17 +26,7 @@ protected:
 	UTankMovementComponent* TankMovementComponent = nullptr;
 
 public:	
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
 	void AimAt(FVector HitLocation);
-
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-
-	UFUNCTION(BlueprintCallable, Category = "Setup")
-	void SetTurretReference(UTankTurret* TurretToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	void Fire();
@@ -51,12 +36,4 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Firing")
 	float LaunchSpeed = 8000;
-
-	// Local barrel reference for spawning projectile
-	UTankBarrel* Barrel = nullptr;
-
-	float ReloadTimeSecs = 3;
-
-	double LastFireTime = 0;
-	
 };
