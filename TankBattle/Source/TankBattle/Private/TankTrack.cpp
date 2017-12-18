@@ -4,6 +4,17 @@
 #include "TankTrack.h"
 
 
+UTankTrack::UTankTrack()
+{
+	PrimaryComponentTick.bCanEverTick = true;
+}
+
+void UTankTrack::TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	//UE_LOG(LogTemp, Warning, TEXT("Track Ticking"));
+}
+
 void UTankTrack::SetThrottle(float Throttle)
 {
 	Throttle = FMath::Clamp<float>(Throttle, -1, 1);
