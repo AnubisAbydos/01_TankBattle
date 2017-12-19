@@ -12,7 +12,8 @@ enum class EFiringStatus : uint8
 {
 	Reloading,
 	Aiming,
-	Locked
+	Locked,
+	NoAmmo
 };
 
 // Forward Declaration
@@ -42,6 +43,14 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Setup")
 	TSubclassOf<AProjectile>ProjectileBlueprint;
+
+	EFiringStatus GetFiringStatus() const;
+
+	UPROPERTY(EditAnywhere, Category = "Setup")
+	int32 AmmoCount = 3;
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	int32 GetAmmoCount() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
