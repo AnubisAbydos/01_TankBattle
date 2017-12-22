@@ -51,7 +51,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
 	int32 GetAmmoCount() const;
-
+	
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
 	EFiringStatus FiringStatus = EFiringStatus::Reloading;
